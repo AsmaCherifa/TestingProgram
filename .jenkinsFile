@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+                // Cloning the Git repository
                 git url: 'https://github.com/AsmaCherifa/TestingProgram.git'
             }
         }
@@ -16,8 +17,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-            docker.image('testingprogram').inside("--workdir //c/ProgramData/Jenkins/.jenkins/workspace/TestingProgramPipeline/") {
-
+                    docker.image('testingprogram').inside('-w /app') {
                         bat 'mvn test'
                     }
                 }
@@ -26,6 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy stage would go here'
+                // Add deployment steps as needed
             }
         }
     }
