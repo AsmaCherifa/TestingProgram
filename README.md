@@ -51,5 +51,9 @@ Run Tests: Jenkins runs unit tests using Maven inside the Docker container to en
 
 Deploy: Jenkins deploys the application by running the Docker container, exposing it on a specified port.
 
+## Usage
+After deploying the application, you can access it at http://localhost:8087 (or the appropriate port you've specified).
 
+## Contributing
+If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. Your contributions are welcome!
 
