@@ -16,7 +16,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    docker.image('testingprogram').inside('-w /app') {
+            docker.image('testingprogram').inside("--workdir //c/ProgramData/Jenkins/.jenkins/workspace/TestingProgramPipeline/") {
+
                         bat 'mvn test'
                     }
                 }
