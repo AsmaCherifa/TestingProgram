@@ -1,43 +1,30 @@
 pipeline {
-    agent any
-
+    agent any 
     stages {
         stage('Clone Repository') {
             steps {
-                // Cloning the repository
-                git 'https://github.com/AsmaCherifa/TestingProgram.git'
+                git url: 'https://github.com/AsmaCherifa/TestingProgram.git'
             }
         }
-        
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Building the Docker image using the Dockerfile in the repository
-                    docker.build('testingprogram')
+                    docker.build("testingprogram")
                 }
             }
         }
-
-      
-
-stage('Run Tests') {
-    steps {
-        script {
-            docker.image('testingprogram').inside('-w /app') {
-                sh 'mvn test'
-            }
-        }
-    }
-}
-
-
-
-        stage('Deploy') {
+        stage('Run Tests') {
             steps {
                 script {
-                    // Run the Docker container and expose the application port
-                    docker.image('testingprogram').run("-p 8087:8087")
+                    docker.image('testingprogram').inside('-w /app') {
+                        bat 'mvn test'
+                    }
                 }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy stage would go here'
             }
         }
     }
