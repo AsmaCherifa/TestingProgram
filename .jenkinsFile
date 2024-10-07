@@ -18,17 +18,19 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Run the tests inside the container
-                    docker.image('testingprogram').inside {
-                        // Use `bat` for Windows, `sh` for Linux
-                        bat 'mvn test'
-                    }
-                }
+      
+
+stage('Run Tests') {
+    steps {
+        script {
+            docker.image('testingprogram').inside('-w /app') {
+                sh 'mvn test'
             }
         }
+    }
+}
+
+
 
         stage('Deploy') {
             steps {
